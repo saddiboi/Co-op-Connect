@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile - Co-op Connect</title>
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+</head>
+<body>
+  <div class="subscreen-container">
+    <div class="content-header">
+      <h1>Student Profile</h1>
+      <p class="content-subtitle">Manage your co-op student information</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👤</div>
+        <div class="stat-content">
+          <span class="stat-title">Account Status</span>
+          <span class="stat-value">Active</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📧</div>
+        <div class="stat-content">
+          <span class="stat-title">Email Verified</span>
+          <span class="stat-value">Yes</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔐</div>
+        <div class="stat-content">
+          <span class="stat-title">2FA Enabled</span>
+          <span class="stat-value">No</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Student Profile Form -->
+      <div class="content-column">
+        <div class="column-card">
+          <h2 class="column-title">Student Details</h2>
+          
+          <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" value="TMU2023005" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label>Program</label>
+            <select>
+              <option selected>Computer Science</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Work Terms Completed</label>
+            <input type="number" value="2" readonly>
+          </div>
+          
+          <!-- Common fields -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" value="student@example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" value="John Doe">
+          </div>
+          
+          <button id="saveProfile" class="btn-primary full-width">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="content-column">
+        <div class="column-card">
+          <h2 class="column-title">Recent Activity</h2>
+          <div class="terms-list">
+            <div class="term-item">
+              <div class="term-info">
+                <span class="term-season">Profile viewed</span>
+                <span class="term-employer">2 hours ago</span>
+              </div>
+            </div>
+            <div class="term-item">
+              <div class="term-info">
+                <span class="term-season">Password changed</span>
+                <span class="term-employer">Mar 10, 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../assets/js/firebase.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const saveBtn = document.getElementById('saveProfile');
+        if (saveBtn) {
+          saveBtn.addEventListener('click', function() {
+            alert('Student profile updated!');
+          });
+        }
+      });
+    </script>
+  </div>
+</body>
+</html>
+

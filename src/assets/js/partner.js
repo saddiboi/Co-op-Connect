@@ -1,7 +1,15 @@
-// Partner Dashboard JavaScript
+y// Partner Dashboard JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Partner dashboard loaded');
+  
+  // Role validation
+  const userRole = localStorage.getItem('userRole');
+  if (!userRole || userRole !== 'employer') {
+    console.warn('Invalid role for employer dashboard:', userRole);
+    window.location.href = '../pages/login.html';
+    return;
+  }
   
   // Quick View buttons functionality
   const quickViewBtns = document.querySelectorAll('.quick-view-btn');

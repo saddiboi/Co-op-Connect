@@ -1,7 +1,14 @@
 // Navigation JavaScript - Shared utility for all dashboards
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Navigation loaded');
+console.log('Navigation loaded');
+  
+  // Validate userRole on dashboard load
+  if (!localStorage.getItem('userRole')) {
+    console.warn('No userRole found, redirecting to login');
+    window.location.href = '../pages/login.html';
+    return;
+  }
   
   // Initialize navigation if nav items exist
   initializeNavigation();
@@ -10,32 +17,82 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeLogout();
 });
 
-// Navigation functionality
+// Navigation functionality - supports both local sections and external subscreens
 function initializeNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
-  const contentSections = document.querySelectorAll('.content-section');
+  const dashboardSection = document.getElementById('dashboard-section');
+  const subscreenContainer = document.getElementById('subscreen-container');
   
-  // Handle navigation clicks
   navItems.forEach(item => {
     item.addEventListener('click', function() {
-      const sectionId = this.getAttribute('data-section');
+      const url = this.getAttribute('data-url');
       
-      // Remove active class from all nav items
+      // Remove active from all nav items
       navItems.forEach(nav => nav.classList.remove('active'));
-      
-      // Add active class to clicked nav item
       this.classList.add('active');
       
-      // Hide all content sections
-      contentSections.forEach(section => section.classList.remove('active'));
+      if (url === 'dashboard') {
+        // Show local dashboard, hide subscreen
+        if (dashboardSection) {
+          dashboardSection.classList.add('active');
+        }
+        if (subscreenContainer) {
+          subscreenContainer.classList.remove('active');
+        }
+        return;
+      }
       
-      // Show the corresponding section
-      const targetSection = document.getElementById(sectionId + '-section');
-      if (targetSection) {
-        targetSection.classList.add('active');
+      // Load external subscreen
+      if (subscreenContainer && url) {
+        loadSubscreen(url, subscreenContainer);
+        if (dashboardSection) {
+          dashboardSection.classList.remove('active');
+        }
       }
     });
   });
+}
+
+// Load external HTML into container with loading spinner
+async function loadSubscreen(url, container) {
+  // Show loading spinner
+  container.innerHTML = `
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Loading ${url}...</p>
+    </div>
+  `;
+  container.classList.add('active');
+  
+  try {
+    const role = localStorage.getItem('userRole') || 'student';
+    const prefixedUrl = `${role}-${url}.html`;
+    const fullUrl = `../pages/sub-pages/${prefixedUrl}`;
+    console.log('Loading subscreen - Role:', role, 'URL:', fullUrl);
+    const response = await fetch(fullUrl);
+
+    if (!response.ok) throw new Error(`Failed to load ${prefixedUrl}`);
+
+    const html = await response.text();
+    container.innerHTML = html;
+    console.log('Subscreen loaded successfully:', prefixedUrl);
+    
+    // Re-initialize after load
+    setTimeout(() => {
+      initializeQuickViewButtons();
+      initializeActionButtons();
+    }, 200);
+    
+  } catch (error) {
+    console.error('LoadSubscreen error:', error);
+    container.innerHTML = `
+      <div class="error-message">
+        <h3>Error Loading Screen</h3>
+        <p>${error.message}</p>
+        <button onclick="location.reload()" class="btn-primary">Reload</button>
+      </div>
+    `;
+  }
 }
 
 // Logout functionality
@@ -43,10 +100,8 @@ function initializeLogout() {
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', function() {
-      // Sign out from Firebase
       firebase.auth().signOut().then(() => {
-        // Redirect to login page
-        window.location.href = 'login.html';
+        window.location.href = '../pages/login.html';
       }).catch((error) => {
         console.error('Logout error:', error);
         alert('Error logging out. Please try again.');
@@ -75,12 +130,25 @@ function initializeActionButtons(actionsConfig = {}) {
   const actionBtns = document.querySelectorAll('.action-btn');
   actionBtns.forEach(btn => {
     btn.addEventListener('click', function() {
-      const actionText = this.querySelector('.action-text').textContent;
+      const actionText = this.querySelector('.action-text')?.textContent;
+      if (!actionText) return;
       
-      // Check if there's a custom handler
       if (actionsConfig[actionText]) {
         actionsConfig[actionText]();
+        return;
+      }
+      
+      // Default handlers
+      switch(actionText) {
+        case 'Review Applications':
+        case 'View Applications':
+          const appsNav = document.querySelector('[data-url="applications"], [data-section="applications"]');
+          if (appsNav) appsNav.click();
+          break;
+        default:
+          console.log(`Action: ${actionText}`);
       }
     });
   });
 }
+

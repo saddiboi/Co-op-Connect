@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partner Dashboard - Co-op Connect</title>
+<title>Employer Dashboard - Co-op Connect</title>
   <link rel="stylesheet" href="../assets/css/global.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
@@ -17,30 +17,26 @@
       </div>
       
       <nav class="sidebar-nav">
-        <ul class="nav-list">
-          <li class="nav-item active" data-section="dashboard">
+<ul class="nav-list">
+          <li class="nav-item active" data-url="dashboard">
             <span class="nav-icon">📊</span>
             <span class="nav-text">Dashboard</span>
           </li>
-          <li class="nav-item" data-section="postings">
-            <span class="nav-icon">📋</span>
-            <span class="nav-text">Job Postings</span>
-          </li>
-          <li class="nav-item" data-section="applications">
+      <li class="nav-item" data-url="employees">
             <span class="nav-icon">👥</span>
-            <span class="nav-text">Applications</span>
+            <span class="nav-text">Employees</span>
           </li>
-          <li class="nav-item" data-section="students">
-            <span class="nav-icon">🎓</span>
-            <span class="nav-text">My Students</span>
+          <li class="nav-item" data-url="work-term-reports">
+            <span class="nav-icon">📋</span>
+            <span class="nav-text">Work-term Reports</span>
           </li>
-          <li class="nav-item" data-section="reports">
+          <li class="nav-item" data-url="evaluation-reports">
             <span class="nav-icon">📈</span>
-            <span class="nav-text">Reports</span>
+            <span class="nav-text">Evaluation Reports</span>
           </li>
-          <li class="nav-item" data-section="settings">
+          <li class="nav-item" data-url="profile">
             <span class="nav-icon">⚙️</span>
-            <span class="nav-text">Settings</span>
+            <span class="nav-text">Profile</span>
           </li>
         </ul>
       </nav>
@@ -185,60 +181,8 @@
         </div>
       </section>
 
-      <!-- Job Postings Section -->
-      <section class="content-section" id="postings-section">
-        <div class="content-header">
-          <h1>Job Postings</h1>
-          <p class="content-subtitle">Manage your co-op job listings</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Job postings content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Applications Section -->
-      <section class="content-section" id="applications-section">
-        <div class="content-header">
-          <h1>Applications</h1>
-          <p class="content-subtitle">Review and manage applicant information</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Applications content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- My Students Section -->
-      <section class="content-section" id="students-section">
-        <div class="content-header">
-          <h1>My Students</h1>
-          <p class="content-subtitle">View current and past interns</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Students content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Reports Section -->
-      <section class="content-section" id="reports-section">
-        <div class="content-header">
-          <h1>Reports</h1>
-          <p class="content-subtitle">View performance reports and analytics</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Reports content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Settings Section -->
-      <section class="content-section" id="settings-section">
-        <div class="content-header">
-          <h1>Settings</h1>
-          <p class="content-subtitle">Manage your account and company profile</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Settings content will be displayed here.</p>
-        </div>
-      </section>
+      <!-- Subscreen Loader -->
+      <div id="subscreen-container" class="content-section active"></div>
     </main>
   </div>
 

@@ -17,26 +17,26 @@
       </div>
       
       <nav class="sidebar-nav">
-        <ul class="nav-list">
-          <li class="nav-item active" data-section="dashboard">
+<ul class="nav-list">
+          <li class="nav-item active" data-url="dashboard">
             <span class="nav-icon">📊</span>
             <span class="nav-text">Dashboard</span>
           </li>
-          <li class="nav-item" data-section="applications">
+      <li class="nav-item" data-url="applications">
             <span class="nav-icon">📝</span>
             <span class="nav-text">Applications</span>
           </li>
-          <li class="nav-item" data-section="reports">
+          <li class="nav-item" data-url="work-term-reports">
+            <span class="nav-icon">📋</span>
+            <span class="nav-text">Work-term Reports</span>
+          </li>
+          <li class="nav-item" data-url="evaluation-reports">
             <span class="nav-icon">📈</span>
-            <span class="nav-text">Reports</span>
+            <span class="nav-text">Evaluation Reports</span>
           </li>
-          <li class="nav-item" data-section="profile">
-            <span class="nav-icon">👤</span>
-            <span class="nav-text">Profile</span>
-          </li>
-          <li class="nav-item" data-section="settings">
+          <li class="nav-item" data-url="profile">
             <span class="nav-icon">⚙️</span>
-            <span class="nav-text">Settings</span>
+            <span class="nav-text">Profile</span>
           </li>
         </ul>
       </nav>
@@ -181,49 +181,8 @@
         </div>
       </section>
 
-      <!-- Applications Section (Hidden by default) -->
-      <section class="content-section" id="applications-section">
-        <div class="content-header">
-          <h1>My Applications</h1>
-          <p class="content-subtitle">Track and manage your co-op applications</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Applications content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Reports Section (Hidden by default) -->
-      <section class="content-section" id="reports-section">
-        <div class="content-header">
-          <h1>Reports</h1>
-          <p class="content-subtitle">View and submit your co-op reports</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Reports content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Profile Section (Hidden by default) -->
-      <section class="content-section" id="profile-section">
-        <div class="content-header">
-          <h1>Profile</h1>
-          <p class="content-subtitle">Manage your personal information</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Profile content will be displayed here.</p>
-        </div>
-      </section>
-
-      <!-- Settings Section (Hidden by default) -->
-      <section class="content-section" id="settings-section">
-        <div class="content-header">
-          <h1>Settings</h1>
-          <p class="content-subtitle">Configure your preferences</p>
-        </div>
-        <div class="placeholder-content">
-          <p>Settings content will be displayed here.</p>
-        </div>
-      </section>
+      <!-- Subscreen Loader -->
+      <div id="subscreen-container" class="content-section active"></div>
     </main>
   </div>
 

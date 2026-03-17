@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Employees - Co-op Connect</title>
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+</head>
+<body>
+  <div class="subscreen-container">
+    <div class="content-header">
+      <h1>Employees</h1>
+      <p class="content-subtitle">Current and past co-op students</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-content">
+          <span class="stat-title">Current Employees</span>
+          <span class="stat-value">8</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-content">
+          <span class="stat-title">Total Alumni</span>
+          <span class="stat-value">42</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="content-column full-width">
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option>All</option>
+            <option>Current</option>
+            <option>Alumni</option>
+          </select>
+        </div>
+        <button class="btn-primary">Add New Employee</button>
+      </div>
+    </div>
+
+    <!-- Employees Table -->
+    <div class="content-column full-width">
+      <div class="column-card">
+        <h2 class="column-title">Employee List</h2>
+        <div class="terms-list">
+          <div class="term-item">
+            <div class="term-info">
+              <span class="term-season">John Doe</span>
+              <span class="term-employer">Winter 2024, Software Dev</span>
+              <span class="term-grade">Active</span>
+            </div>
+            <div class="term-status">
+              <span class="status-badge active">Current</span>
+              <button class="btn-small">Profile</button>
+            </div>
+          </div>
+          <div class="term-item">
+            <div class="term-info">
+              <span class="term-season">Sarah Johnson</span>
+              <span class="term-employer">Fall 2023, QA</span>
+              <span class="term-grade">Graduated</span>
+            </div>
+            <div class="term-status">
+              <span class="status-badge completed">Alumni</span>
+              <button class="btn-small">Contact</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/firebase.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.btn-small').forEach(btn => {
+        btn.addEventListener('click', function() {
+          alert('Employee action...');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Profile - Co-op Connect</title>
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+</head>
+<body>
+  <div class="subscreen-container">
+    <div class="content-header">
+      <h1>Company Profile</h1>
+      <p class="content-subtitle">Manage your employer account information</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-content">
+          <span class="stat-title">Account Status</span>
+          <span class="stat-value">Active</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📧</div>
+        <div class="stat-content">
+          <span class="stat-title">Email Verified</span>
+          <span class="stat-value">Yes</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-content">
+          <span class="stat-title">Open Positions</span>
+          <span class="stat-value">5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Employer Profile Form -->
+      <div class="content-column">
+        <div class="column-card">
+          <h2 class="column-title">Company Details</h2>
+          
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" value="Tech Corp Inc.">
+          </div>
+          
+          <div class="form-group">
+            <label>Industry</label>
+            <select>
+              <option selected>Technology</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Open Positions</label>
+            <input type="number" value="5">
+          </div>
+          
+          <!-- Common fields -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" value="employer@example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Contact Name</label>
+            <input type="text" id="name" value="Jane Smith">
+          </div>
+          
+          <button id="saveProfile" class="btn-primary full-width">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="content-column">
+        <div class="column-card">
+          <h2 class="column-title">Recent Activity</h2>
+          <div class="terms-list">
+            <div class="term-item">
+              <div class="term-info">
+                <span class="term-season">New applicant</span>
+                <span class="term-employer">2 hours ago</span>
+              </div>
+            </div>
+            <div class="term-item">
+              <div class="term-info">
+                <span class="term-season">Report submitted</span>
+                <span class="term-employer">Mar 10, 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../assets/js/firebase.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const saveBtn = document.getElementById('saveProfile');
+        if (saveBtn) {
+          saveBtn.addEventListener('click', function() {
+            alert('Employer profile updated!');
+          });
+        }
+      });
+    </script>
+  </div>
+</body>
+</html>
+

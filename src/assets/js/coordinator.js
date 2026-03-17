@@ -3,6 +3,14 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Coordinator dashboard loaded');
   
+  // Role validation
+  const userRole = localStorage.getItem('userRole');
+  if (!userRole || userRole !== 'coordinator') {
+    console.warn('Invalid role for coordinator dashboard:', userRole);
+    window.location.href = '../pages/login.html';
+    return;
+  }
+  
   // Action buttons functionality
   const actionBtns = document.querySelectorAll('.action-btn');
   actionBtns.forEach(btn => {

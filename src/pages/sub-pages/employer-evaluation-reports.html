@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Evaluation Reports - Co-op Connect</title>
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+</head>
+<body>
+  <div class="subscreen-container">
+    <div class="content-header">
+      <h1>Evaluation Reports</h1>
+      <p class="content-subtitle">Manage evaluations for your employees</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-content">
+          <span class="stat-title">Pending Evaluations</span>
+          <span class="stat-value">3</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-content">
+          <span class="stat-title">Submitted</span>
+          <span class="stat-value">15</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="content-column full-width">
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="termFilter">Term</label>
+          <select id="termFilter">
+            <option>All Terms</option>
+            <option>Winter 2024</option>
+            <option>Fall 2023</option>
+          </select>
+        </div>
+        <button class="btn-primary">New Evaluation</button>
+      </div>
+    </div>
+
+    <!-- Employees Table -->
+    <div class="content-column full-width">
+      <div class="column-card">
+        <h2 class="column-title">Employee Evaluations</h2>
+        <div class="terms-list">
+          <div class="term-item">
+            <div class="term-info">
+              <span class="term-season">John Doe</span>
+              <span class="term-employer">Winter 2024</span>
+              <span class="term-grade">Pending</span>
+            </div>
+            <div class="term-status">
+              <span class="status-badge pending">Pending</span>
+              <button class="btn-small">Submit</button>
+            </div>
+          </div>
+          <div class="term-item">
+            <div class="term-info">
+              <span class="term-season">Sarah Johnson</span>
+              <span class="term-employer">Fall 2023</span>
+              <span class="term-grade">4.8</span>
+            </div>
+            <div class="term-status">
+              <span class="status-badge completed">Submitted</span>
+              <button class="btn-small">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/firebase.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.btn-small').forEach(btn => {
+        btn.addEventListener('click', function() {
+          alert('Evaluation action...');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

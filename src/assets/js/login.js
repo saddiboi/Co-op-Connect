@@ -57,20 +57,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
           console.log("User role:", userRole);
 
+          // Store role for sub-pages
+          localStorage.setItem('userRole', userRole);
+
           // Redirect based on user role
           let dashboardUrl = "";
           switch (userRole) {
             case 'student':
-              dashboardUrl = "studentDashboard.html";
+              dashboardUrl = "student-dashboard.html";
               break;
             case 'coordinator':
-              dashboardUrl = "coordinatorDashboard.html";
+              dashboardUrl = "coordinator-dashboard.html";
               break;
             case 'employer':
-              dashboardUrl = "partnerDashboard.html";
+              dashboardUrl = "employer-dashboard.html"; // Fixed to match file
               break;
             default:
-              dashboardUrl = "studentDashboard.html";
+              dashboardUrl = "student-dashboard.html";
           }
 
           successMessage.style.display = 'block';

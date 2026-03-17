@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Work Term Reports - Co-op Connect</title>
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+</head>
+<body>
+  <div class="subscreen-container">
+    <div class="content-header">
+      <h1>Employee Work Term Reports</h1>
+      <p class="content-subtitle">Review employee submissions</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-content">
+          <span class="stat-title">Current Employees</span>
+          <span class="stat-value">3</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-content">
+          <span class="stat-title">Pending Reviews</span>
+          <span class="stat-value">2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-column full-width">
+      <div class="column-card">
+        <h2>Employee Reports</h2>
+        <div id="employer-reports">
+          <div class="report-item">
+            <span>John Doe - Winter 2024 - Submitted</span>
+            <button>View PDF</button>
+            <button class="btn-small">Approve</button>
+          </div>
+          <div class="report-item">
+            <span>Sarah Johnson - Winter 2024 - Draft</span>
+            <button>Remind</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../assets/js/firebase.js"></script>
+    <script src="../../assets/js/navigation.js"></script>
+  </div>
+</body>
+</html>
+

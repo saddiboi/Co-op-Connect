@@ -3,6 +3,14 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Student dashboard loaded');
   
+  // Role validation
+  const userRole = localStorage.getItem('userRole');
+  if (!userRole || userRole !== 'student') {
+    console.warn('Invalid role for student dashboard:', userRole);
+    window.location.href = '../pages/login.html';
+    return;
+  }
+  
   // Initialize quick view buttons
   const quickViewBtns = document.querySelectorAll('.quick-view-btn');
   quickViewBtns.forEach(btn => {
