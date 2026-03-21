@@ -12,23 +12,26 @@
   <div class="subscreen-container">
     <div class="content-header">
       <h1>My Evaluation Reports</h1>
-      <p class="content-subtitle">Submit and review evaluations for your work terms</p>
+      <p class="content-subtitle">Review employer evaluation reports for your work terms.</p>
     </div>
 
-    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-icon">⭐</div>
+        <div class="stat-icon-svg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9"/><path d="M8.5 11.5 3 17a2 2 0 0 0 1.4 3.4h15.2A2 2 0 0 0 21 17l-5.5-5.5"/><path d="M12 16h.01"/></svg>
+        </div>
         <div class="stat-content">
-          <span class="stat-title">Evaluations Due</span>
-          <span class="stat-value">2</span>
+          <span class="stat-title">Pending Employer Uploads</span>
+          <span class="stat-value" id="studentEvaluationPendingCount">0</span>
         </div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">📊</div>
+        <div class="stat-icon-svg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="17 3 21 3 21 7"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="9" y1="13" x2="9.01" y2="13"/><line x1="9" y1="17" x2="9.01" y2="17"/></svg>
+        </div>
         <div class="stat-content">
-          <span class="stat-title">Avg Rating</span>
-          <span class="stat-value">4.5</span>
+          <span class="stat-title">Reports Available</span>
+          <span class="stat-value" id="studentEvaluationAvailableCount">0</span>
         </div>
       </div>
     </div>
@@ -36,46 +39,25 @@
     <div class="dashboard-grid">
       <div class="content-column">
         <div class="column-card">
-          <h2 class="column-title">Evaluations to Complete</h2>
-          <div class="terms-list">
-            <div class="term-item">
-              <div class="term-info">
-                <span class="term-season">Winter 2024</span>
-                <span class="term-employer">Tech Corp</span>
-                <span class="term-grade">Due Mar 1</span>
-              </div>
-              <div class="term-status">
-                <span class="status-badge pending">Pending</span>
-                <button class="quick-view-btn">Complete</button>
-              </div>
-            </div>
+          <h2 class="column-title">Pending Employer Evaluations</h2>
+          <div class="terms-list" id="studentEvaluationPendingList">
+            <div class="applications-empty-state">Loading pending evaluation reports...</div>
           </div>
         </div>
       </div>
-      
+
       <div class="content-column">
         <div class="column-card">
-          <h2 class="column-title">Past Evaluations</h2>
-          <div class="terms-list">
-            <div class="term-item">
-              <div class="term-info">
-                <span class="term-season">Fall 2023</span>
-                <span class="term-employer">StartupXYZ</span>
-                <span class="term-grade">4.8/5</span>
-              </div>
-              <div class="term-status">
-                <span class="status-badge completed">Completed</span>
-                <button class="quick-view-btn small">Review</button>
-              </div>
-            </div>
+          <h2 class="column-title">Available Evaluation Reports</h2>
+          <div class="terms-list" id="studentEvaluationCompletedList">
+            <div class="applications-empty-state">Loading submitted evaluation reports...</div>
           </div>
         </div>
       </div>
     </div>
-
-    <script src="../../assets/js/firebase.js"></script>
-    <script src="../../assets/js/navigation.js"></script>
   </div>
+
+  <script src="../../assets/js/firebase.js"></script>
+  <script src="../../assets/js/student-evaluation-reports.js"></script>
 </body>
 </html>
-

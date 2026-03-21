@@ -1020,6 +1020,30 @@ body {
   font-weight: 600;
 }
 
+.student-list-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.student-list-header-row .column-title {
+  margin-bottom: 0;
+}
+
+.student-view-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.student-view-toggle .quick-view-btn.active {
+  background: #1e40af;
+  color: #ffffff;
+  border-color: #1e40af;
+}
+
 .profile-dashboard-grid {
   align-items: start;
 }
@@ -1166,6 +1190,20 @@ body {
   margin-top: 22px;
   display: flex;
   justify-content: flex-start;
+}
+
+.profile-save-status {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.profile-save-status.success {
+  color: #047857;
+}
+
+.profile-save-status.error {
+  color: #b91c1c;
 }
 
 .profile-side-stack {

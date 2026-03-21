@@ -11,7 +11,7 @@
   <div class="subscreen-container">
     <div class="content-header">
       <h1>Students</h1>
-      <p class="content-subtitle">Students assigned to your coordinator account.</p>
+      <p class="content-subtitle" id="coordinatorStudentSubtitle">Students assigned to your coordinator account.</p>
     </div>
 
     <div class="stats-grid coordinator-report-stats">
@@ -20,7 +20,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div class="stat-content">
-          <span class="stat-title">Assigned Students</span>
+          <span class="stat-title" id="coordinatorStudentCountLabel">Assigned Students</span>
           <span class="stat-value" id="coordinatorAssignedStudentCount">0</span>
         </div>
       </div>
@@ -57,7 +57,13 @@
 
     <div class="content-column full-width">
       <div class="column-card">
-        <h2 class="column-title">Student List</h2>
+        <div class="student-list-header-row">
+          <h2 class="column-title" id="coordinatorStudentListTitle">Student List</h2>
+          <div class="student-view-toggle" role="group" aria-label="Student list view">
+            <button class="quick-view-btn active" type="button" id="coordinatorStudentMyViewBtn">My Students</button>
+            <button class="quick-view-btn" type="button" id="coordinatorStudentAllViewBtn">All Students</button>
+          </div>
+        </div>
         <div class="applications-list" id="coordinatorAssignedStudentsList">
           <div class="applications-empty-state">Loading assigned students...</div>
         </div>

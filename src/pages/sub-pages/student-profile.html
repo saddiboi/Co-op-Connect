@@ -22,7 +22,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Account Status</span>
-          <span class="stat-value">Active</span>
+          <span class="stat-value" id="studentProfileAccountStatus">-</span>
         </div>
       </div>
       <div class="stat-card">
@@ -31,7 +31,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Email Verified</span>
-          <span class="stat-value">Yes</span>
+          <span class="stat-value" id="studentProfileEmailVerified">-</span>
         </div>
       </div>
       <div class="stat-card">
@@ -40,7 +40,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Work Terms Completed</span>
-          <span class="stat-value">2</span>
+          <span class="stat-value" id="studentProfileWorkTermsStat">-</span>
         </div>
       </div>
     </div>
@@ -49,10 +49,10 @@
       <div class="content-column">
         <div class="column-card profile-panel">
           <div class="profile-identity">
-            <div class="profile-avatar student">JD</div>
+            <div class="profile-avatar student" id="studentProfileAvatar">-</div>
             <div class="profile-identity-copy">
-              <h2>John Doe</h2>
-              <p>Computer Science student</p>
+              <h2 id="studentProfileHeadingName">Loading...</h2>
+              <p id="studentProfileHeadingSubtitle">Student account</p>
               <div class="profile-chip-row">
                 <span class="profile-chip">Student</span>
                 <span class="profile-chip subtle">Co-op Candidate</span>
@@ -68,37 +68,39 @@
           <div class="profile-form-grid">
             <div class="form-group">
               <label for="studentFullName">Full Name</label>
-              <input type="text" id="studentFullName" value="John Doe">
+              <input type="text" id="studentFullName" value="">
             </div>
             <div class="form-group">
               <label for="studentEmail">Email</label>
-              <input type="email" id="studentEmail" value="student@example.com">
+              <input type="email" id="studentEmail" value="" readonly>
             </div>
             <div class="form-group">
               <label for="studentId">Student ID</label>
-              <input type="text" id="studentId" value="TMU2023005" readonly>
+              <input type="text" id="studentId" value="" placeholder="Not set" readonly>
             </div>
             <div class="form-group">
               <label for="studentProgram">Program</label>
               <select id="studentProgram">
-                <option selected>Computer Science</option>
-                <option>Business Technology Management</option>
-                <option>Information Technology Management</option>
+                <option value="">Select program</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Business Technology Management">Business Technology Management</option>
+                <option value="Information Technology Management">Information Technology Management</option>
               </select>
             </div>
             <div class="form-group">
               <label for="studentExpectedGrad">Expected Graduation</label>
-              <input type="text" id="studentExpectedGrad" value="Spring 2027">
+              <input type="text" id="studentExpectedGrad" value="">
             </div>
             <div class="form-group">
               <label for="studentTermsCompleted">Work Terms Completed</label>
-              <input type="number" id="studentTermsCompleted" value="2" readonly>
+              <input type="number" id="studentTermsCompleted" value="0" readonly>
             </div>
           </div>
 
           <div class="profile-save-row">
             <button id="saveProfile" class="btn-primary" type="button">Save Changes</button>
           </div>
+          <p id="studentProfileStatus" class="profile-save-status" hidden></p>
         </div>
       </div>
 
@@ -112,15 +114,15 @@
             <div class="profile-summary-list">
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Current Standing</span>
-                <span class="profile-summary-value">Good academic standing</span>
+                <span class="profile-summary-value" id="studentProfileCurrentStanding">Not available</span>
               </div>
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Assigned Coordinator</span>
-                <span class="profile-summary-value">Alex Ufkes</span>
+                <span class="profile-summary-value" id="studentProfileAssignedCoordinator">Not assigned</span>
               </div>
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Assigned Employer</span>
-                <span class="profile-summary-value">Tech Corp Inc.</span>
+                <span class="profile-summary-value" id="studentProfileAssignedEmployer">Not assigned</span>
               </div>
             </div>
           </div>
@@ -151,15 +153,6 @@
   </div>
 
   <script src="../../assets/js/firebase.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const saveBtn = document.getElementById('saveProfile');
-      if (saveBtn) {
-        saveBtn.addEventListener('click', function() {
-          alert('Student profile updated!');
-        });
-      }
-    });
-  </script>
+  <script src="../../assets/js/student-profile.js"></script>
 </body>
 </html>

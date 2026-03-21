@@ -1,8 +1,11 @@
 let coordinatorAssignedStudents = [];
+let coordinatorAllStudents = [];
 let coordinatorStudentSearchTerm = '';
 let coordinatorStudentLoadSummary = [];
 let coordinatorStudentCoordinatorOptions = [];
 let coordinatorStudentEmployerOptions = [];
+let coordinatorShowAllStudents = false;
+let coordinatorStudentCurrentUserId = '';
 
 const COORDINATOR_STUDENT_EVALUATION_COLLECTION = 'evaluationReports';
 
@@ -104,17 +107,43 @@ function createCoordinatorStudentAssignmentEditor(student, assignmentType) {
   `;
 }
 
+function getCoordinatorVisibleStudents() {
+  return coordinatorShowAllStudents ? coordinatorAllStudents : coordinatorAssignedStudents;
+}
+
+function getCoordinatorStudentStatus(student) {
+  if (student.assignedCoordinatorId === coordinatorStudentCurrentUserId) {
+    return {
+      label: 'Assigned',
+      className: 'completed'
+    };
+  }
+
+  if (student.assignedCoordinatorId) {
+    return {
+      label: 'Other Coordinator',
+      className: 'neutral'
+    };
+  }
+
+  return {
+    label: 'Unassigned',
+    className: 'pending'
+  };
+}
+
 function createCoordinatorAssignedStudentCard(student) {
   const studentName = `${student.firstName || ''} ${student.lastName || ''}`.trim() || 'Unnamed Student';
   const assignedEmployer = student.assignedEmployerName || 'No employer assigned';
   const studentEmail = student.email || '';
+  const status = getCoordinatorStudentStatus(student);
 
   return `
     <div class="application-card coordinator-student-card" data-coordinator-student-card="${escapeCoordinatorStudentHtml(student.uid)}">
       <div class="application-card-main">
         <div class="application-card-header">
           <span class="application-card-title">${escapeCoordinatorStudentHtml(studentName)}</span>
-          <span class="status-badge completed">Assigned</span>
+          <span class="status-badge ${escapeCoordinatorStudentHtml(status.className)}">${escapeCoordinatorStudentHtml(status.label)}</span>
         </div>
         <div class="application-card-email">${escapeCoordinatorStudentHtml(studentEmail || 'No email available')}</div>
         <div class="coordinator-report-meta">
@@ -145,6 +174,9 @@ function updateCoordinatorAssignedStudentSummary(students) {
   const countElement = document.getElementById('coordinatorAssignedStudentCount');
   const emailCountElement = document.getElementById('coordinatorAssignedStudentEmailCount');
   const loadListElement = document.getElementById('coordinatorStudentLoadList');
+  const countLabelElement = document.getElementById('coordinatorStudentCountLabel');
+  const subtitleElement = document.getElementById('coordinatorStudentSubtitle');
+  const listTitleElement = document.getElementById('coordinatorStudentListTitle');
 
   if (countElement) {
     countElement.textContent = String(students.length);
@@ -153,6 +185,20 @@ function updateCoordinatorAssignedStudentSummary(students) {
   if (emailCountElement) {
     const emailCount = students.filter((student) => Boolean(student.email)).length;
     emailCountElement.textContent = String(emailCount);
+  }
+
+  if (countLabelElement) {
+    countLabelElement.textContent = coordinatorShowAllStudents ? 'Visible Students' : 'Assigned Students';
+  }
+
+  if (subtitleElement) {
+    subtitleElement.textContent = coordinatorShowAllStudents
+      ? 'All student accounts across the co-op platform.'
+      : 'Students assigned to your coordinator account.';
+  }
+
+  if (listTitleElement) {
+    listTitleElement.textContent = coordinatorShowAllStudents ? 'All Students' : 'My Students';
   }
 
   if (loadListElement) {
@@ -178,6 +224,50 @@ function bindCoordinatorStudentSearch() {
     coordinatorStudentSearchTerm = searchInput.value.trim().toLowerCase();
     renderCoordinatorAssignedStudentsList();
   });
+}
+
+function updateCoordinatorStudentViewButtons() {
+  const myViewButton = document.getElementById('coordinatorStudentMyViewBtn');
+  const allViewButton = document.getElementById('coordinatorStudentAllViewBtn');
+
+  if (myViewButton) {
+    myViewButton.classList.toggle('active', !coordinatorShowAllStudents);
+  }
+
+  if (allViewButton) {
+    allViewButton.classList.toggle('active', coordinatorShowAllStudents);
+  }
+}
+
+function bindCoordinatorStudentViewButtons() {
+  const myViewButton = document.getElementById('coordinatorStudentMyViewBtn');
+  const allViewButton = document.getElementById('coordinatorStudentAllViewBtn');
+
+  if (myViewButton && myViewButton.dataset.bound !== 'true') {
+    myViewButton.dataset.bound = 'true';
+    myViewButton.addEventListener('click', () => {
+      if (!coordinatorShowAllStudents) {
+        return;
+      }
+
+      coordinatorShowAllStudents = false;
+      renderCoordinatorAssignedStudentsList();
+    });
+  }
+
+  if (allViewButton && allViewButton.dataset.bound !== 'true') {
+    allViewButton.dataset.bound = 'true';
+    allViewButton.addEventListener('click', () => {
+      if (coordinatorShowAllStudents) {
+        return;
+      }
+
+      coordinatorShowAllStudents = true;
+      renderCoordinatorAssignedStudentsList();
+    });
+  }
+
+  updateCoordinatorStudentViewButtons();
 }
 
 function closeCoordinatorStudentAssignmentPanels(card) {
@@ -257,7 +347,7 @@ async function syncCoordinatorStudentEvaluationAssignment(student, nextAssignmen
 }
 
 async function updateCoordinatorStudentAssignment(studentUid, assignmentType, button) {
-  const student = coordinatorAssignedStudents.find((entry) => entry.uid === studentUid);
+  const student = coordinatorAllStudents.find((entry) => entry.uid === studentUid);
   if (!student) {
     return;
   }
@@ -348,21 +438,32 @@ function renderCoordinatorAssignedStudentsList() {
   const list = document.getElementById('coordinatorAssignedStudentsList');
   if (!list) return;
 
-  updateCoordinatorAssignedStudentSummary(coordinatorAssignedStudents);
-  bindCoordinatorStudentSearch();
+  const visibleStudents = getCoordinatorVisibleStudents();
 
-  const filteredStudents = coordinatorAssignedStudents.filter((student) => {
+  updateCoordinatorAssignedStudentSummary(visibleStudents);
+  bindCoordinatorStudentSearch();
+  bindCoordinatorStudentViewButtons();
+
+  const filteredStudents = visibleStudents.filter((student) => {
     if (!coordinatorStudentSearchTerm) {
       return true;
     }
 
     const studentName = `${student.firstName || ''} ${student.lastName || ''}`.trim().toLowerCase();
     const email = (student.email || '').toLowerCase();
-    return studentName.includes(coordinatorStudentSearchTerm) || email.includes(coordinatorStudentSearchTerm);
+    const coordinatorName = (student.assignedCoordinatorName || '').toLowerCase();
+    const employerName = (student.assignedEmployerName || '').toLowerCase();
+
+    return studentName.includes(coordinatorStudentSearchTerm)
+      || email.includes(coordinatorStudentSearchTerm)
+      || coordinatorName.includes(coordinatorStudentSearchTerm)
+      || employerName.includes(coordinatorStudentSearchTerm);
   });
 
   if (!filteredStudents.length) {
-    list.innerHTML = '<div class="applications-empty-state">No assigned students match the current search.</div>';
+    list.innerHTML = coordinatorShowAllStudents
+      ? '<div class="applications-empty-state">No students match the current search.</div>'
+      : '<div class="applications-empty-state">No assigned students match the current search.</div>';
     return;
   }
 
@@ -406,7 +507,7 @@ async function renderCoordinatorAssignedStudents() {
   const list = document.getElementById('coordinatorAssignedStudentsList');
   if (!list) return;
 
-  list.innerHTML = '<div class="applications-empty-state">Loading assigned students...</div>';
+  list.innerHTML = '<div class="applications-empty-state">Loading students...</div>';
 
   try {
     if (window.seedStudentsToCoordinatorByName) {
@@ -418,6 +519,8 @@ async function renderCoordinatorAssignedStudents() {
       list.innerHTML = '<div class="applications-empty-state">Unable to determine the current coordinator.</div>';
       return;
     }
+
+    coordinatorStudentCurrentUserId = currentUser.uid;
 
     const [coordinatorsSnapshot, employersSnapshot, assignedToCurrentSnapshot, allStudentsSnapshot] = await Promise.all([
       firebase.firestore().collection('users').where('role', '==', 'coordinator').get(),
@@ -472,16 +575,27 @@ async function renderCoordinatorAssignedStudents() {
       return leftName.localeCompare(rightName);
     });
 
-    if (!coordinatorAssignedStudents.length) {
+    coordinatorAllStudents = allStudentsSnapshot.docs.map((doc) => ({
+      uid: doc.id,
+      ...doc.data()
+    }));
+
+    coordinatorAllStudents.sort((left, right) => {
+      const leftName = `${left.firstName || ''} ${left.lastName || ''}`.trim().toLowerCase();
+      const rightName = `${right.firstName || ''} ${right.lastName || ''}`.trim().toLowerCase();
+      return leftName.localeCompare(rightName);
+    });
+
+    if (!coordinatorAssignedStudents.length && !coordinatorAllStudents.length) {
       updateCoordinatorAssignedStudentSummary([]);
-      list.innerHTML = '<div class="applications-empty-state">No students are currently assigned to this coordinator.</div>';
+      list.innerHTML = '<div class="applications-empty-state">No student accounts were found.</div>';
       return;
     }
 
     renderCoordinatorAssignedStudentsList();
   } catch (error) {
     console.error('Unable to load assigned students:', error);
-    list.innerHTML = '<div class="applications-empty-state">Unable to load assigned students right now.</div>';
+    list.innerHTML = '<div class="applications-empty-state">Unable to load students right now.</div>';
   }
 }
 

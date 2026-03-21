@@ -22,7 +22,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Account Status</span>
-          <span class="stat-value">Active</span>
+          <span class="stat-value" id="employerProfileAccountStatus">-</span>
         </div>
       </div>
       <div class="stat-card">
@@ -31,7 +31,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Email Verified</span>
-          <span class="stat-value">Yes</span>
+          <span class="stat-value" id="employerProfileEmailVerified">-</span>
         </div>
       </div>
       <div class="stat-card">
@@ -40,7 +40,7 @@
         </div>
         <div class="stat-content">
           <span class="stat-title">Open Positions</span>
-          <span class="stat-value">5</span>
+          <span class="stat-value" id="employerProfileOpenPositionsStat">-</span>
         </div>
       </div>
     </div>
@@ -49,10 +49,10 @@
       <div class="content-column">
         <div class="column-card profile-panel">
           <div class="profile-identity">
-            <div class="profile-avatar company">TC</div>
+            <div class="profile-avatar company" id="employerProfileAvatar">-</div>
             <div class="profile-identity-copy">
-              <h2>Tech Corp Inc.</h2>
-              <p>Technology employer partner</p>
+              <h2 id="employerProfileHeadingName">Loading...</h2>
+              <p id="employerProfileHeadingSubtitle">Employer account</p>
               <div class="profile-chip-row">
                 <span class="profile-chip">Employer</span>
                 <span class="profile-chip subtle">Hiring Partner</span>
@@ -62,44 +62,70 @@
 
           <div class="profile-section-header">
             <h3>Company Details</h3>
-            <p>Keep your public company profile and recruiter details current.</p>
+            <p>Keep your public company profile current for students and coordinators.</p>
           </div>
 
           <div class="profile-form-grid">
             <div class="form-group">
               <label for="employerCompanyName">Company Name</label>
-              <input type="text" id="employerCompanyName" value="Tech Corp Inc.">
-            </div>
-            <div class="form-group">
-              <label for="employerContactName">Contact Name</label>
-              <input type="text" id="employerContactName" value="Jane Smith">
-            </div>
-            <div class="form-group">
-              <label for="employerEmail">Email</label>
-              <input type="email" id="employerEmail" value="employer@example.com">
+              <input type="text" id="employerCompanyName" value="">
             </div>
             <div class="form-group">
               <label for="employerIndustry">Industry</label>
               <select id="employerIndustry">
-                <option selected>Technology</option>
-                <option>Finance</option>
-                <option>Healthcare</option>
-                <option>Education</option>
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Finance">Finance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
               </select>
             </div>
             <div class="form-group">
               <label for="employerWebsite">Company Website</label>
-              <input type="text" id="employerWebsite" value="www.techcorp.ca">
+              <input type="text" id="employerWebsite" value="">
+            </div>
+            <div class="form-group">
+              <label for="employerHeadOffice">Head Office</label>
+              <input type="text" id="employerHeadOffice" value="">
             </div>
             <div class="form-group">
               <label for="employerOpenPositions">Open Positions</label>
-              <input type="number" id="employerOpenPositions" value="5">
+              <input type="number" id="employerOpenPositions" value="0" min="0">
+            </div>
+            <div class="form-group">
+              <label for="employerPartnerSince">Partner Since</label>
+              <input type="text" id="employerPartnerSince" value="" readonly>
+            </div>
+          </div>
+
+          <div class="profile-section-header">
+            <h3>Account User Details</h3>
+            <p>Manage the employer account holder information tied to this company.</p>
+          </div>
+
+          <div class="profile-form-grid">
+            <div class="form-group">
+              <label for="employerAccountFullName">Full Name</label>
+              <input type="text" id="employerAccountFullName" value="">
+            </div>
+            <div class="form-group">
+              <label for="employerAccountEmail">Account Email</label>
+              <input type="email" id="employerAccountEmail" value="" readonly>
+            </div>
+            <div class="form-group">
+              <label for="employerContactEmail">Contact Email</label>
+              <input type="email" id="employerContactEmail" value="">
+            </div>
+            <div class="form-group">
+              <label for="employerJobTitle">Job Title</label>
+              <input type="text" id="employerJobTitle" value="">
             </div>
           </div>
 
           <div class="profile-save-row">
             <button id="saveProfile" class="btn-primary" type="button">Save Changes</button>
           </div>
+          <p id="employerProfileStatus" class="profile-save-status" hidden></p>
         </div>
       </div>
 
@@ -113,15 +139,15 @@
             <div class="profile-summary-list">
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Partner Since</span>
-                <span class="profile-summary-value">2022</span>
+                <span class="profile-summary-value" id="employerProfilePartnerSince">Not available</span>
               </div>
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Head Office</span>
-                <span class="profile-summary-value">Toronto, Ontario</span>
+                <span class="profile-summary-value" id="employerProfileHeadOfficeSummary">Not available</span>
               </div>
               <div class="profile-summary-item">
                 <span class="profile-summary-label">Student Placements</span>
-                <span class="profile-summary-value">18 completed terms</span>
+                <span class="profile-summary-value" id="employerProfileStudentPlacements">0 completed terms</span>
               </div>
             </div>
           </div>
@@ -152,15 +178,6 @@
   </div>
 
   <script src="../../assets/js/firebase.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const saveBtn = document.getElementById('saveProfile');
-      if (saveBtn) {
-        saveBtn.addEventListener('click', function() {
-          alert('Employer profile updated!');
-        });
-      }
-    });
-  </script>
+  <script src="../../assets/js/employer-profile.js"></script>
 </body>
 </html>

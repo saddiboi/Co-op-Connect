@@ -106,8 +106,17 @@ async function loadSubscreen(url, container) {
       if (window.initializeStudentWorkTermReportPages) {
         window.initializeStudentWorkTermReportPages();
       }
+      if (window.initializeStudentEvaluationReportPages) {
+        window.initializeStudentEvaluationReportPages();
+      }
       if (window.initializeStudentCoordinatorContactPage) {
         window.initializeStudentCoordinatorContactPage();
+      }
+      if (window.initializeStudentProfilePage) {
+        window.initializeStudentProfilePage();
+      }
+      if (window.initializeCoordinatorProfilePage) {
+        window.initializeCoordinatorProfilePage();
       }
       if (window.initializeCoordinatorApplicationPages) {
         window.initializeCoordinatorApplicationPages();
@@ -129,6 +138,9 @@ async function loadSubscreen(url, container) {
       }
       if (window.initializeEmployerEmployeesPage) {
         window.initializeEmployerEmployeesPage();
+      }
+      if (window.initializeEmployerProfilePage) {
+        window.initializeEmployerProfilePage();
       }
       if (window.initializeEmployerWorkTermReportPages) {
         window.initializeEmployerWorkTermReportPages();
