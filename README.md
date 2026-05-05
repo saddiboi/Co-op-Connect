@@ -78,7 +78,12 @@ Built using **Electron**, **Firebase**, and **Cloudinary**, the platform ensures
 
 ---
 
-## 🖥 Setup and Run Locally (VS Code)
+## 🖥 Download the app:
+[Download here](https://github.com/Gulveer-Kalle/Co-op-Connect/releases/download/v1.1.2/Co-op.Connect.exe)
+
+---
+
+## 🖥 Setup and Run Locally (VS Code
 
     git clone https://github.com/Gulveer-Kalle/Co-op-Connect.git
     npm install
