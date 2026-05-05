@@ -79,7 +79,7 @@ Built using **Electron**, **Firebase**, and **Cloudinary**, the platform ensures
 ---
 
 ## 🖥 Download the app:
-[Download here](https://github.com/Gulveer-Kalle/Co-op-Connect/releases/download/v1.1.2/Co-op.Connect.exe)
+[Download here](https://github.com/saddiboi/Co-op-Connect/releases/download/v.1.1.2/Co-op.Connect.exe)
 
 ---
 
